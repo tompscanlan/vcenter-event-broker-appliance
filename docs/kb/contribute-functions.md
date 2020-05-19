@@ -5,7 +5,7 @@ title: VMware Event Broker Appliance - Building Functions
 description: Building Functions
 permalink: /kb/contribute-functions
 cta:
- title: Have a question? 
+ title: Have a question?
  description: Please check our [Frequently Asked Questions](/faq) first.
 ---
 
@@ -29,7 +29,7 @@ You can also get started quickly with these quickstart [templates](https://githu
   server = "VCENTER_FQDN/IP"
   user = "tagging-admin@vsphere.local"
   password = "DontUseThisPassword"
-  
+
   [tag]
   urn = "urn:vmomi:InventoryServiceTag:019c0a9e-0672-48f5-ac2a-e394669e2916:GLOBAL" # replace the actual urn of the tag
   action = "attach" # tagging action to perform, i.e. attach or detach tag
@@ -85,7 +85,7 @@ However, as outlined in previous sections in this guide, there are still some be
 
 Avoid writing huge function handlers. Instead of describing a huge workflow in your function or using long if/else/switch statements to deal with any type of event, consider breaking your problem up into smaller pieces (functions). This makes your code cleaner, easier to understand/contribute to and maintainable. As a result, your function will likely run faster and return early, avoiding undesired blocking behavior.
 
-Single Responsibility Principle (SRP) is the philosophy behind the UNIX command line tools. "Do one job and do it well". Solve complex problems by breaking them down with composition where the output of one program becomes the input of the next program. 
+Single Responsibility Principle (SRP) is the philosophy behind the UNIX command line tools. "Do one job and do it well". Solve complex problems by breaking them down with composition where the output of one program becomes the input of the next program.
 
 > **Note:** Generally, workflows should not be handled in functions but by workflow engines, such as vRealize Orchestrator (vRO). vRO and the VMware Event Broker Appliance work well together, e.g. by triggering workflows from functions via the vRO REST API. Upon completion, or for intermediary steps, vRO might call back into the appliance and leverage other functions for lightweight execution handling.
 
@@ -125,7 +125,7 @@ def handle(req):
 <!-- omit in toc -->
 ### Return early/defer or externalize Work
 
-Your primary goal should be to avoid long-running functions (minutes) as much as possible. The longer your function runs, the more things can go wrong and you might have to start from scratch (which might not be possible without additional persistency safeties in your logic). 
+Your primary goal should be to avoid long-running functions (minutes) as much as possible. The longer your function runs, the more things can go wrong and you might have to start from scratch (which might not be possible without additional persistency safeties in your logic).
 
 Usually that's an indicator that your function can be further broken down into smaller steps or could be better handled with a workflow engine, see [Single Responsibility Principle](#single-responsibility-principle) above.
 
@@ -196,7 +196,7 @@ To support idempotency checks, the VMware Event Broker Appliance [event payload]
 <!-- omit in toc -->
 ### Out of Order Message Arrival
 
-Even though unlikely due to the underlying TCP/IP guarantees, but nevertheless possible in specific environments or deployments - dealing with out of order message arrival in your function/downstream logic might be a requirement. 
+Even though unlikely due to the underlying TCP/IP guarantees, but nevertheless possible in specific environments or deployments - dealing with out of order message arrival in your function/downstream logic might be a requirement.
 
 Therefore, your function or downstream system can use the vCenter event "Key", a monotonically increasing value set by vCenter, to discard late arriving messages with a lower "Key" value. If your function supports "warm" invocations (see `"http"` mode described above) the value can be cached in memory or alternatively (for increased durability) persisted in an external datastore/cache such as [Redis](https://redis.io/).
 

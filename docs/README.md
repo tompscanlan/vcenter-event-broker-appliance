@@ -24,7 +24,7 @@ The website is hosted using [Github Pages](https://help.github.com/en/github/wor
 └── Gemfile                   > Plugins required for the website to be built by Jekyll
 ```
 
-In order for Jekyll to process the MD files and render them as html, you'll need to add the below to the beginning of the each MD file. 
+In order for Jekyll to process the MD files and render them as html, you'll need to add the below to the beginning of the each MD file.
 
 ```yaml
 ---
@@ -89,7 +89,7 @@ bundle install
 * Serve the site and watch for markup/sass changes `jekyll serve --livereload --incremental`. You may need to run `bundle exec jekyll serve --livereload --incremental`.
 * View your website at http://127.0.0.1:4000/
 * Commit any changes and push everything to your fork.
-* Once you're ready, submit a PR of your changes. 
+* Once you're ready, submit a PR of your changes.
 
 ## Troubleshooting
 * If you don't see your updates reflected on the website when running locally, try the following steps
